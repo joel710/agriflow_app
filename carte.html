@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carte des Producteurs Locaux</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config = { theme: { extend: { colors: { primary: '#4CAF50', secondary: '#FF9800' }, borderRadius: { 'none': '0px', 'sm': '4px', DEFAULT: '8px', 'md': '12px', 'lg': '16px', 'xl': '20px', '2xl': '24px', '3xl': '32px', 'full': '9999px', 'button': '8px' } } } }</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <style>
+        :where([class^="ri-"])::before {
+            content: "\f3c2";
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            height: 762px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .map-container {
+            background-image: url('https://public.readdy.ai/gen_page/map_placeholder_1280x720.png');
+            background-position: center;
+            background-size: cover;
+        }
+
+        .producer-card {
+            transform: translateY(100%);
+            transition: transform 0.3s ease-out;
+        }
+
+        .producer-card.active {
+            transform: translateY(0);
+        }
+
+        .filter-chip.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .search-input:focus {
+            outline: none;
+        }
+
+        .custom-marker {
+            transition: transform 0.2s ease;
+        }
+
+        .custom-marker:hover {
+            transform: scale(1.2);
+        }
+
+        .rating-stars {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .rating-stars i {
+            color: #FFD700;
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+    <!-- Carte principale -->
+    <div class="map-container w-full h-screen relative">
+        <!-- Barre de navigation supérieure -->
+        <div class="fixed top-0 left-0 w-full bg-white shadow-md z-30 px-4 py-3 flex items-center justify-between">
+            <button class="w-8 h-8 flex items-center justify-center text-gray-700">
+                <i class="ri-arrow-left-line ri-lg"></i>
+            </button>
+            <h1 class="text-lg font-medium">Carte des producteurs</h1>
+            <button id="filter-button" class="w-8 h-8 flex items-center justify-center text-gray-700 cursor-pointer">
+                <i class="ri-filter-3-line ri-lg"></i>
+            </button>
+        </div>
+
+        <!-- Barre de recherche -->
+        <div class="fixed top-16 left-0 w-full px-4 z-20">
+            <div class="bg-white rounded-lg shadow-md flex items-center p-2 w-full">
+                <div class="w-8 h-8 flex items-center justify-center text-gray-500">
+                    <i class="ri-search-line ri-lg"></i>
+                </div>
+                <input type="text" placeholder="Rechercher une adresse"
+                    class="search-input flex-1 px-2 text-sm border-none">
+                <button class="w-8 h-8 flex items-center justify-center text-primary cursor-pointer">
+                    <i class="ri-map-pin-line ri-lg"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Filtres de catégories -->
+        <div class="fixed top-28 left-0 w-full px-4 z-20">
+            <div class="overflow-x-auto whitespace-nowrap py-2 pb-3 flex gap-2">
+                <button
+                    class="filter-chip active px-4 py-2 rounded-full text-xs font-medium bg-white shadow-sm cursor-pointer">
+                    Tous
+                </button>
+                <button
+                    class="filter-chip px-4 py-2 rounded-full text-xs font-medium bg-white shadow-sm cursor-pointer">
+                    Fruits
+                </button>
+                <button
+                    class="filter-chip px-4 py-2 rounded-full text-xs font-medium bg-white shadow-sm cursor-pointer">
+                    Légumes
+                </button>
+                <button
+                    class="filter-chip px-4 py-2 rounded-full text-xs font-medium bg-white shadow-sm cursor-pointer">
+                    Produits laitiers
+                </button>
+                <button
+                    class="filter-chip px-4 py-2 rounded-full text-xs font-medium bg-white shadow-sm cursor-pointer">
+                    Viandes
+                </button>
+                <button
+                    class="filter-chip px-4 py-2 rounded-full text-xs font-medium bg-white shadow-sm cursor-pointer">
+                    Bio
+                </button>
+                <button
+                    class="filter-chip px-4 py-2 rounded-full text-xs font-medium bg-white shadow-sm cursor-pointer">
+                    Vins
+                </button>
+            </div>
+        </div>
+
+        <!-- Bouton de recentrage -->
+        <button id="recenter-button"
+            class="fixed bottom-28 right-4 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center z-20 cursor-pointer">
+            <i class="ri-focus-3-line ri-lg text-primary"></i>
+        </button>
+
+        <!-- Marqueurs de producteurs (simulés) -->
+        <div class="custom-marker absolute top-1/3 left-1/2 transform -translate-x-12 -translate-y-6 z-10 cursor-pointer"
+            data-id="1">
+            <div class="w-10 h-10 flex items-center justify-center bg-primary rounded-full shadow-md">
+                <i class="ri-plant-line ri-lg text-white"></i>
+            </div>
+        </div>
+        <div class="custom-marker absolute top-2/5 left-1/3 transform -translate-x-12 -translate-y-6 z-10 cursor-pointer"
+            data-id="2">
+            <div class="w-10 h-10 flex items-center justify-center bg-primary rounded-full shadow-md">
+                <i class="ri-seedling-line ri-lg text-white"></i>
+            </div>
+        </div>
+        <div class="custom-marker absolute top-1/2 left-2/3 transform -translate-x-12 -translate-y-6 z-10 cursor-pointer"
+            data-id="3">
+            <div class="w-10 h-10 flex items-center justify-center bg-primary rounded-full shadow-md">
+                <i class="ri-leaf-line ri-lg text-white"></i>
+            </div>
+        </div>
+
+        <!-- Fiche producteur (initialement cachée) -->
+        <div id="producer-card" class="producer-card fixed bottom-16 left-0 w-full px-4 z-30">
+            <div class="bg-white rounded-t-xl shadow-lg p-4">
+                <div class="flex items-start gap-3">
+                    <img src="https://readdy.ai/api/search-image?query=organic%20farm%20with%20fresh%20vegetables%2C%20photorealistic%2C%20natural%20lighting%2C%20farm%20setting%2C%20high%20quality&width=100&height=100&seq=123&orientation=squarish"
+                        alt="Ferme du Soleil" class="w-20 h-20 rounded-lg object-cover">
+                    <div class="flex-1">
+                        <h3 class="font-semibold text-base">Ferme du Soleil</h3>
+                        <p class="text-xs text-gray-500 mt-0.5">3,2 km · Ouvert jusqu'à 19h</p>
+                        <div class="flex flex-wrap gap-1 mt-1">
+                            <span class="text-xs bg-green-50 text-primary px-2 py-0.5 rounded-full">Légumes</span>
+                            <span class="text-xs bg-green-50 text-primary px-2 py-0.5 rounded-full">Fruits</span>
+                            <span class="text-xs bg-green-50 text-primary px-2 py-0.5 rounded-full">Bio</span>
+                        </div>
+                        <div class="flex items-center mt-1.5">
+                            <div class="rating-stars">
+                                <i class="ri-star-fill ri-xs"></i>
+                                <i class="ri-star-fill ri-xs"></i>
+                                <i class="ri-star-fill ri-xs"></i>
+                                <i class="ri-star-fill ri-xs"></i>
+                                <i class="ri-star-half-fill ri-xs"></i>
+                            </div>
+                            <span class="text-xs text-gray-500 ml-1">4.5 (128 avis)</span>
+                        </div>
+                    </div>
+                    <button class="close-card w-6 h-6 flex items-center justify-center text-gray-400 cursor-pointer">
+                        <i class="ri-close-line"></i>
+                    </button>
+                </div>
+                <div class="flex gap-2 mt-3">
+                    <button
+                        class="flex-1 bg-primary text-white py-2 rounded-button text-sm font-medium flex items-center justify-center cursor-pointer">
+                        <i class="ri-phone-line mr-1"></i> Appeler
+                    </button>
+                    <button
+                        class="flex-1 border border-primary text-primary py-2 rounded-button text-sm font-medium flex items-center justify-center cursor-pointer">
+                        <i class="ri-route-line mr-1"></i> Itinéraire
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filtre modal (initialement caché) -->
+        <div id="filter-modal" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden">
+            <div class="absolute bottom-0 left-0 w-full bg-white rounded-t-xl p-4">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="font-semibold text-lg">Filtres</h3>
+                    <button class="close-modal w-8 h-8 flex items-center justify-center text-gray-500 cursor-pointer">
+                        <i class="ri-close-line ri-lg"></i>
+                    </button>
+                </div>
+
+                <div class="mb-4">
+                    <h4 class="font-medium text-sm mb-2">Distance</h4>
+                    <input type="range" min="1" max="50" value="15"
+                        class="w-full h-2 bg-gray-200 rounded-full appearance-none">
+                    <div class="flex justify-between text-xs text-gray-500 mt-1">
+                        <span>1 km</span>
+                        <span>15 km</span>
+                        <span>50 km</span>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h4 class="font-medium text-sm mb-2">Types de produits</h4>
+                    <div class="grid grid-cols-2 gap-2">
+                        <label class="flex items-center gap-2 text-sm">
+                            <input type="checkbox" checked class="w-4 h-4 accent-primary">
+                            Fruits
+                        </label>
+                        <label class="flex items-center gap-2 text-sm">
+                            <input type="checkbox" checked class="w-4 h-4 accent-primary">
+                            Légumes
+                        </label>
+                        <label class="flex items-center gap-2 text-sm">
+                            <input type="checkbox" class="w-4 h-4 accent-primary">
+                            Produits laitiers
+                        </label>
+                        <label class="flex items-center gap-2 text-sm">
+                            <input type="checkbox" class="w-4 h-4 accent-primary">
+                            Viandes
+                        </label>
+                        <label class="flex items-center gap-2 text-sm">
+                            <input type="checkbox" class="w-4 h-4 accent-primary">
+                            Œufs
+                        </label>
+                        <label class="flex items-center gap-2 text-sm">
+                            <input type="checkbox" class="w-4 h-4 accent-primary">
+                            Vins
+                        </label>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h4 class="font-medium text-sm mb-2">Certifications</h4>
+                    <div class="grid grid-cols-2 gap-2">
+                        <label class="flex items-center gap-2 text-sm">
+                            <input type="checkbox" checked class="w-4 h-4 accent-primary">
+                            Agriculture biologique
+                        </label>
+                        <label class="flex items-center gap-2 text-sm">
+                            <input type="checkbox" class="w-4 h-4 accent-primary">
+                            Label rouge
+                        </label>
+                        <label class="flex items-center gap-2 text-sm">
+                            <input type="checkbox" class="w-4 h-4 accent-primary">
+                            AOP/AOC
+                        </label>
+                        <label class="flex items-center gap-2 text-sm">
+                            <input type="checkbox" class="w-4 h-4 accent-primary">
+                            HVE
+                        </label>
+                    </div>
+                </div>
+
+                <div class="flex gap-3 mt-6">
+                    <button
+                        class="flex-1 py-3 border border-gray-300 rounded-button text-sm font-medium cursor-pointer">
+                        Réinitialiser
+                    </button>
+                    <button class="flex-1 py-3 bg-primary text-white rounded-button text-sm font-medium cursor-pointer">
+                        Appliquer
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Barre de navigation inférieure -->
+    <div class="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 z-30">
+        <div class="grid grid-cols-4 h-16">
+            <a href="https://readdy.ai/home/5c7068af-c027-4b3f-8c3f-2498a72bd519/ad782f83-6f1e-4cab-8f1d-20d2d7977fb6"
+                data-readdy="true" class="flex flex-col items-center justify-center cursor-pointer">
+                <div class="w-6 h-6 flex items-center justify-center">
+                    <i class="ri-home-5-line text-gray-500"></i>
+                </div>
+                <span class="text-xs text-gray-500 mt-1">Accueil</span>
+            </a>
+            <a class="flex flex-col items-center justify-center cursor-pointer">
+                <div class="w-6 h-6 flex items-center justify-center">
+                    <i class="ri-search-line text-gray-500"></i>
+                </div>
+                <span class="text-xs text-gray-500 mt-1">Recherche</span>
+            </a>
+            <a class="flex flex-col items-center justify-center cursor-pointer">
+                <div class="w-6 h-6 flex items-center justify-center">
+                    <i class="ri-map-pin-line text-primary"></i>
+                </div>
+                <span class="text-xs text-primary font-medium mt-1">Carte</span>
+            </a>
+            <a class="flex flex-col items-center justify-center cursor-pointer">
+                <div class="w-6 h-6 flex items-center justify-center">
+                    <i class="ri-user-line text-gray-500"></i>
+                </div>
+                <span class="text-xs text-gray-500 mt-1">Profil</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Gérer l'affichage de la fiche producteur
+            const markers = document.querySelectorAll('.custom-marker');
+            const producerCard = document.getElementById('producer-card');
+            const closeCardBtn = document.querySelector('.close-card');
+
+            markers.forEach(marker => {
+                marker.addEventListener('click', function () {
+                    producerCard.classList.add('active');
+                });
+            });
+
+            closeCardBtn.addEventListener('click', function () {
+                producerCard.classList.remove('active');
+            });
+
+            // Gérer les filtres
+            const filterChips = document.querySelectorAll('.filter-chip');
+
+            filterChips.forEach(chip => {
+                chip.addEventListener('click', function () {
+                    if (chip.textContent.trim() === 'Tous') {
+                        filterChips.forEach(c => {
+                            if (c.textContent.trim() === 'Tous') {
+                                c.classList.add('active');
+                            } else {
+                                c.classList.remove('active');
+                            }
+                        });
+                    } else {
+                        const allChip = document.querySelector('.filter-chip:first-child');
+                        allChip.classList.remove('active');
+                        this.classList.toggle('active');
+                    }
+                });
+            });
+
+            // Gérer le modal de filtres
+            const filterButton = document.getElementById('filter-button');
+            const filterModal = document.getElementById('filter-modal');
+            const closeModalBtn = document.querySelector('.close-modal');
+
+            filterButton.addEventListener('click', function () {
+                filterModal.classList.remove('hidden');
+            });
+
+            closeModalBtn.addEventListener('click', function () {
+                filterModal.classList.add('hidden');
+            });
+
+            // Simuler la géolocalisation
+            const recenterButton = document.getElementById('recenter-button');
+
+            recenterButton.addEventListener('click', function () {
+                // Afficher une notification de géolocalisation
+                const notification = document.createElement('div');
+                notification.className = 'fixed top-20 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-70 text-white px-4 py-2 rounded-lg text-sm z-50';
+                notification.textContent = 'Localisation en cours...';
+                document.body.appendChild(notification);
+
+                // Simuler la fin de la géolocalisation après 2 secondes
+                setTimeout(() => {
+                    notification.textContent = 'Position trouvée !';
+                    setTimeout(() => {
+                        notification.remove();
+                    }, 1000);
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+
+</html>

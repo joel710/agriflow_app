@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agritech - La technologie au service de l'agriculture</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config = { theme: { extend: { colors: { primary: '#4CAF50', secondary: '#FF9800' }, borderRadius: { 'none': '0px', 'sm': '4px', DEFAULT: '8px', 'md': '12px', 'lg': '16px', 'xl': '20px', '2xl': '24px', '3xl': '32px', 'full': '9999px', 'button': '8px' } } } }</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <style>
+        :where([class^="ri-"])::before {
+            content: "\f3c2";
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .main-content {
+            padding-top: 64px;
+            padding-bottom: 64px;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <!-- Nav Bar -->
+    <nav class="fixed top-0 w-full bg-white shadow-sm z-50">
+        <div class="flex items-center justify-between px-4 py-3">
+            <div class="flex items-center">
+                <h1 class="text-xl font-['Pacifico'] text-primary">logo</h1>
+            </div>
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-notification-3-line text-gray-600"></i>
+                </div>
+                <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-user-line text-gray-600"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Hero Section -->
+        <div class="relative h-48 mb-6 overflow-hidden">
+            <img src="https://readdy.ai/api/search-image?query=beautiful%20agricultural%20field%20with%20modern%20technology%2C%20drone%20flying%20over%20green%20crops%2C%20digital%20farming%20concept%2C%20vibrant%20colors%2C%20sunny%20day%2C%20high%20quality%20professional%20photography&width=375&height=192&seq=1&orientation=landscape"
+                alt="Agriculture moderne" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-4">
+                <h2 class="text-white text-xl font-semibold">Bienvenue sur Agritech</h2>
+                <p class="text-white text-sm">La technologie au service de l'agriculture</p>
+            </div>
+        </div>
+        <!-- Search Bar -->
+        <div class="px-4 mb-6">
+            <div class="relative">
+                <input type="text" placeholder="Rechercher des produits..."
+                    class="w-full py-2 pl-10 pr-4 bg-white border-none rounded-button shadow-sm text-sm">
+                <div
+                    class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center">
+                    <i class="ri-search-line text-gray-400"></i>
+                </div>
+            </div>
+        </div>
+        <!-- Categories -->
+        <div class="px-4 mb-6">
+            <h3 class="text-base font-medium mb-3">Catégories</h3>
+            <div class="grid grid-cols-5 gap-3">
+                <div class="flex flex-col items-center">
+                    <div
+                        class="w-12 h-12 bg-white rounded-full shadow-sm flex items-center justify-center overflow-hidden mb-1">
+                        <img src="https://readdy.ai/api/search-image?query=icon%2C%203D%20cartoon%2C%20fruits%2C%20the%20icon%20should%20take%20up%2070%25%20of%20the%20frame%2C%20vibrant%20colors%20with%20soft%20gradients%2C%20minimalist%20design%2C%20smooth%20rounded%20shapes%2C%20subtle%20shading%2C%20no%20outlines%2C%20centered%20composition%2C%20isolated%20on%20white%20background%2C%20playful%20and%20friendly%20aesthetic%2C%20high%20detail%20quality%2C%20clean%20and%20modern%20look%2C%20single%20object%20focus&width=48&height=48&seq=2&orientation=squarish"
+                            alt="Fruits" class="w-full h-full object-cover">
+                    </div>
+                    <span
+                        class="text-xs text-center whitespace-nowrap overflow-hidden text-overflow-ellipsis">Fruits</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div
+                        class="w-12 h-12 bg-white rounded-full shadow-sm flex items-center justify-center overflow-hidden mb-1">
+                        <img src="https://readdy.ai/api/search-image?query=icon%2C%203D%20cartoon%2C%20vegetables%2C%20the%20icon%20should%20take%20up%2070%25%20of%20the%20frame%2C%20vibrant%20colors%20with%20soft%20gradients%2C%20minimalist%20design%2C%20smooth%20rounded%20shapes%2C%20subtle%20shading%2C%20no%20outlines%2C%20centered%20composition%2C%20isolated%20on%20white%20background%2C%20playful%20and%20friendly%20aesthetic%2C%20high%20detail%20quality%2C%20clean%20and%20modern%20look%2C%20single%20object%20focus&width=48&height=48&seq=3&orientation=squarish"
+                            alt="Légumes" class="w-full h-full object-cover">
+                    </div>
+                    <span
+                        class="text-xs text-center whitespace-nowrap overflow-hidden text-overflow-ellipsis">Légumes</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div
+                        class="w-12 h-12 bg-white rounded-full shadow-sm flex items-center justify-center overflow-hidden mb-1">
+                        <img src="https://readdy.ai/api/search-image?query=icon%2C%203D%20cartoon%2C%20organic%20products%2C%20the%20icon%20should%20take%20up%2070%25%20of%20the%20frame%2C%20vibrant%20colors%20with%20soft%20gradients%2C%20minimalist%20design%2C%20smooth%20rounded%20shapes%2C%20subtle%20shading%2C%20no%20outlines%2C%20centered%20composition%2C%20isolated%20on%20white%20background%2C%20playful%20and%20friendly%20aesthetic%2C%20high%20detail%20quality%2C%20clean%20and%20modern%20look%2C%20single%20object%20focus&width=48&height=48&seq=4&orientation=squarish"
+                            alt="Bio" class="w-full h-full object-cover">
+                    </div>
+                    <span
+                        class="text-xs text-center whitespace-nowrap overflow-hidden text-overflow-ellipsis">Bio</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div
+                        class="w-12 h-12 bg-white rounded-full shadow-sm flex items-center justify-center overflow-hidden mb-1">
+                        <img src="https://readdy.ai/api/search-image?query=icon%2C%203D%20cartoon%2C%20dairy%20products%2C%20the%20icon%20should%20take%20up%2070%25%20of%20the%20frame%2C%20vibrant%20colors%20with%20soft%20gradients%2C%20minimalist%20design%2C%20smooth%20rounded%20shapes%2C%20subtle%20shading%2C%20no%20outlines%2C%20centered%20composition%2C%20isolated%20on%20white%20background%2C%20playful%20and%20friendly%20aesthetic%2C%20high%20detail%20quality%2C%20clean%20and%20modern%20look%2C%20single%20object%20focus&width=48&height=48&seq=5&orientation=squarish"
+                            alt="Laitiers" class="w-full h-full object-cover">
+                    </div>
+                    <span
+                        class="text-xs text-center whitespace-nowrap overflow-hidden text-overflow-ellipsis">Laitiers</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div
+                        class="w-12 h-12 bg-white rounded-full shadow-sm flex items-center justify-center overflow-hidden mb-1">
+                        <img src="https://readdy.ai/api/search-image?query=icon%2C%203D%20cartoon%2C%20meat%2C%20the%20icon%20should%20take%20up%2070%25%20of%20the%20frame%2C%20vibrant%20colors%20with%20soft%20gradients%2C%20minimalist%20design%2C%20smooth%20rounded%20shapes%2C%20subtle%20shading%2C%20no%20outlines%2C%20centered%20composition%2C%20isolated%20on%20white%20background%2C%20playful%20and%20friendly%20aesthetic%2C%20high%20detail%20quality%2C%20clean%20and%20modern%20look%2C%20single%20object%20focus&width=48&height=48&seq=6&orientation=squarish"
+                            alt="Viandes" class="w-full h-full object-cover">
+                    </div>
+                    <span
+                        class="text-xs text-center whitespace-nowrap overflow-hidden text-overflow-ellipsis">Viandes</span>
+                </div>
+            </div>
+        </div>
+        <!-- Promotions -->
+        <div class="px-4 mb-6">
+            <div class="flex items-center justify-between mb-3">
+                <h3 class="text-base font-medium">Promotions du jour</h3>
+                <a href="#" class="text-xs text-primary">Voir tout</a>
+            </div>
+            <div class="bg-white rounded-lg shadow-sm p-3 flex items-center">
+                <div class="w-24 h-24 rounded-lg overflow-hidden mr-3">
+                    <img src="https://readdy.ai/api/search-image?query=fresh%20organic%20strawberries%20in%20a%20wooden%20basket%2C%20high%20quality%20professional%20product%20photography%2C%20clean%20white%20background%2C%20vibrant%20red%20color%2C%20detailed%20texture%2C%20soft%20natural%20lighting%2C%20commercial%20quality%2C%20centered%20composition&width=96&height=96&seq=7&orientation=squarish"
+                        alt="Fraises bio" class="w-full h-full object-cover">
+                </div>
+                <div class="flex-1">
+                    <div class="flex items-center mb-1">
+                        <span class="bg-secondary/10 text-secondary text-xs px-2 py-0.5 rounded-full">-20%</span>
+                    </div>
+                    <h4 class="text-sm font-medium">Fraises bio de saison</h4>
+                    <p class="text-xs text-gray-500 mb-1">Producteur: Ferme Durand</p>
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <span class="text-sm font-medium text-primary">3,20 €</span>
+                            <span class="text-xs text-gray-400 line-through ml-1">4,00 €</span>
+                        </div>
+                        <button
+                            class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center !rounded-button cursor-pointer">
+                            <i class="ri-add-line"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Produits populaires -->
+        <div class="px-4 mb-6">
+            <div class="flex items-center justify-between mb-3">
+                <h3 class="text-base font-medium">Produits populaires</h3>
+                <a href="#" class="text-xs text-primary">Voir tout</a>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+                <div class="bg-white rounded-lg shadow-sm p-3">
+                    <div class="w-full h-28 rounded-lg overflow-hidden mb-2">
+                        <img src="https://readdy.ai/api/search-image?query=fresh%20organic%20tomatoes%2C%20high%20quality%20professional%20product%20photography%2C%20clean%20white%20background%2C%20vibrant%20red%20color%2C%20detailed%20texture%2C%20soft%20natural%20lighting%2C%20commercial%20quality%2C%20centered%20composition&width=140&height=112&seq=8&orientation=landscape"
+                            alt="Tomates" class="w-full h-full object-cover">
+                    </div>
+                    <h4 class="text-sm font-medium mb-1">Tomates Coeur de Boeuf</h4>
+                    <p class="text-xs text-gray-500 mb-1">Producteur: Les Jardins de Pierre</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm font-medium">2,50 € / kg</span>
+                        <button
+                            class="w-7 h-7 bg-primary text-white rounded-full flex items-center justify-center !rounded-button cursor-pointer">
+                            <i class="ri-add-line"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-sm p-3">
+                    <div class="w-full h-28 rounded-lg overflow-hidden mb-2">
+                        <img src="https://readdy.ai/api/search-image?query=fresh%20organic%20carrots%2C%20high%20quality%20professional%20product%20photography%2C%20clean%20white%20background%2C%20vibrant%20orange%20color%2C%20detailed%20texture%2C%20soft%20natural%20lighting%2C%20commercial%20quality%2C%20centered%20composition&width=140&height=112&seq=9&orientation=landscape"
+                            alt="Carottes" class="w-full h-full object-cover">
+                    </div>
+                    <h4 class="text-sm font-medium mb-1">Carottes Bio</h4>
+                    <p class="text-xs text-gray-500 mb-1">Producteur: Ferme Naturelle</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm font-medium">1,80 € / kg</span>
+                        <button
+                            class="w-7 h-7 bg-primary text-white rounded-full flex items-center justify-center !rounded-button cursor-pointer">
+                            <i class="ri-add-line"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-sm p-3">
+                    <div class="w-full h-28 rounded-lg overflow-hidden mb-2">
+                        <img src="https://readdy.ai/api/search-image?query=fresh%20organic%20apples%2C%20high%20quality%20professional%20product%20photography%2C%20clean%20white%20background%2C%20vibrant%20red%20and%20green%20color%2C%20detailed%20texture%2C%20soft%20natural%20lighting%2C%20commercial%20quality%2C%20centered%20composition&width=140&height=112&seq=10&orientation=landscape"
+                            alt="Pommes" class="w-full h-full object-cover">
+                    </div>
+                    <h4 class="text-sm font-medium mb-1">Pommes Gala</h4>
+                    <p class="text-xs text-gray-500 mb-1">Producteur: Vergers Martin</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm font-medium">2,20 € / kg</span>
+                        <button
+                            class="w-7 h-7 bg-primary text-white rounded-full flex items-center justify-center !rounded-button cursor-pointer">
+                            <i class="ri-add-line"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-sm p-3">
+                    <div class="w-full h-28 rounded-lg overflow-hidden mb-2">
+                        <img src="https://readdy.ai/api/search-image?query=fresh%20organic%20lettuce%2C%20high%20quality%20professional%20product%20photography%2C%20clean%20white%20background%2C%20vibrant%20green%20color%2C%20detailed%20texture%2C%20soft%20natural%20lighting%2C%20commercial%20quality%2C%20centered%20composition&width=140&height=112&seq=11&orientation=landscape"
+                            alt="Salade" class="w-full h-full object-cover">
+                    </div>
+                    <h4 class="text-sm font-medium mb-1">Salade Batavia</h4>
+                    <p class="text-xs text-gray-500 mb-1">Producteur: Ferme Bio Locale</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm font-medium">1,20 € / pièce</span>
+                        <button
+                            class="w-7 h-7 bg-primary text-white rounded-full flex items-center justify-center !rounded-button cursor-pointer">
+                            <i class="ri-add-line"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Producteurs à proximité -->
+        <div class="px-4 mb-6">
+            <div class="flex items-center justify-between mb-3">
+                <h3 class="text-base font-medium">Producteurs à proximité</h3>
+                <a href="#" class="text-xs text-primary">Voir tout</a>
+            </div>
+            <div class="space-y-3">
+                <div class="bg-white rounded-lg shadow-sm p-3 flex items-center">
+                    <div class="w-14 h-14 rounded-full overflow-hidden mr-3">
+                        <img src="https://readdy.ai/api/search-image?query=portrait%20of%20a%20middle-aged%20french%20farmer%20in%20a%20field%2C%20professional%20photography%2C%20natural%20lighting%2C%20genuine%20smile%2C%20wearing%20casual%20work%20clothes%2C%20high%20quality%2C%20detailed&width=56&height=56&seq=12&orientation=squarish"
+                            alt="Producteur" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-sm font-medium">Ferme Durand</h4>
+                        <p class="text-xs text-gray-500 mb-1">5 km • Fruits & Légumes</p>
+                        <div class="flex items-center">
+                            <div class="flex items-center text-yellow-400">
+                                <i class="ri-star-fill text-xs"></i>
+                                <i class="ri-star-fill text-xs"></i>
+                                <i class="ri-star-fill text-xs"></i>
+                                <i class="ri-star-fill text-xs"></i>
+                                <i class="ri-star-half-fill text-xs"></i>
+                            </div>
+                            <span class="text-xs text-gray-500 ml-1">(42)</span>
+                        </div>
+                    </div>
+                    <button
+                        class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center !rounded-button cursor-pointer">
+                        <i class="ri-arrow-right-s-line text-gray-600"></i>
+                    </button>
+                </div>
+                <div class="bg-white rounded-lg shadow-sm p-3 flex items-center">
+                    <div class="w-14 h-14 rounded-full overflow-hidden mr-3">
+                        <img src="https://readdy.ai/api/search-image?query=portrait%20of%20a%20young%20female%20french%20farmer%20in%20a%20greenhouse%2C%20professional%20photography%2C%20natural%20lighting%2C%20genuine%20smile%2C%20wearing%20casual%20work%20clothes%2C%20high%20quality%2C%20detailed&width=56&height=56&seq=13&orientation=squarish"
+                            alt="Producteur" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-sm font-medium">Les Jardins de Pierre</h4>
+                        <p class="text-xs text-gray-500 mb-1">8 km • Légumes Bio</p>
+                        <div class="flex items-center">
+                            <div class="flex items-center text-yellow-400">
+                                <i class="ri-star-fill text-xs"></i>
+                                <i class="ri-star-fill text-xs"></i>
+                                <i class="ri-star-fill text-xs"></i>
+                                <i class="ri-star-fill text-xs"></i>
+                                <i class="ri-star-line text-xs"></i>
+                            </div>
+                            <span class="text-xs text-gray-500 ml-1">(38)</span>
+                        </div>
+                    </div>
+                    <button
+                        class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center !rounded-button cursor-pointer">
+                        <i class="ri-arrow-right-s-line text-gray-600"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Floating Cart Button -->
+    <div class="fixed bottom-20 right-4 z-40">
+        <button
+            class="w-14 h-14 bg-primary text-white rounded-full shadow-lg flex items-center justify-center !rounded-button cursor-pointer">
+            <i class="ri-shopping-cart-2-fill ri-lg"></i>
+            <span
+                class="absolute -top-1 -right-1 bg-secondary text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">3</span>
+        </button>
+    </div>
+    <!-- Tab Bar -->
+    <div class="fixed bottom-0 w-full bg-white shadow-[0_-2px_10px_rgba(0,0,0,0.05)] z-50">
+        <div class="grid grid-cols-5 h-14">
+            <a href="#" class="flex flex-col items-center justify-center text-primary">
+                <div class="w-6 h-6 flex items-center justify-center">
+                    <i class="ri-home-5-fill"></i>
+                </div>
+                <span class="text-xs mt-0.5">Accueil</span>
+            </a>
+            <a href="#" class="flex flex-col items-center justify-center text-gray-500">
+                <div class="w-6 h-6 flex items-center justify-center">
+                    <i class="ri-compass-3-line"></i>
+                </div>
+                <span class="text-xs mt-0.5">Explorer</span>
+            </a>
+            <a href="carte.html"
+                data-readdy="true" class="flex flex-col items-center justify-center text-gray-500">
+                <div class="w-6 h-6 flex items-center justify-center">
+                    <i class="ri-map-pin-line"></i>
+                </div>
+                <span class="text-xs mt-0.5">Carte</span>
+            </a>
+            <a href="cmd.html"
+                data-readdy="true" class="flex flex-col items-center justify-center text-gray-500">
+                <div class="w-6 h-6 flex items-center justify-center">
+                    <i class="ri-file-list-3-line"></i>
+                </div>
+                <span class="text-xs mt-0.5">Commandes</span>
+            </a>
+            <a href="#" class="flex flex-col items-center justify-center text-gray-500">
+                <div class="w-6 h-6 flex items-center justify-center">
+                    <i class="ri-user-line"></i>
+                </div>
+                <span class="text-xs mt-0.5">Profil</span>
+            </a>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const addButtons = document.querySelectorAll('button:has(i.ri-add-line)');
+            addButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const cartBadge = document.querySelector('.ri-shopping-cart-2-fill + span');
+                    const currentCount = parseInt(cartBadge.textContent);
+                    cartBadge.textContent = currentCount + 1;
+                    // Animation effet
+                    button.classList.add('scale-110');
+                    setTimeout(() => {
+                        button.classList.remove('scale-110');
+                    }, 200);
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

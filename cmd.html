@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agritech - Mes Commandes</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config = { theme: { extend: { colors: { primary: '#4CAF50', secondary: '#FF9800' }, borderRadius: { 'none': '0px', 'sm': '4px', DEFAULT: '8px', 'md': '12px', 'lg': '16px', 'xl': '20px', '2xl': '24px', '3xl': '32px', 'full': '9999px', 'button': '8px' } } } }</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <style>
+        :where([class^="ri-"])::before {
+            content: "\f3c2";
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .main-content {
+            padding-top: 64px;
+            padding-bottom: 64px;
+        }
+
+        .status-pill {
+            padding: 2px 8px;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .status-en-cours {
+            background-color: rgba(255, 152, 0, 0.1);
+            color: #FF9800;
+        }
+
+        .status-livree {
+            background-color: rgba(76, 175, 80, 0.1);
+            color: #4CAF50;
+        }
+
+        .status-annulee {
+            background-color: rgba(244, 67, 54, 0.1);
+            color: #F44336;
+        }
+
+        .track-progress {
+            height: 4px;
+            background-color: #E5E7EB;
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .track-progress-bar {
+            height: 100%;
+            background-color: #4CAF50;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <!-- Nav Bar -->
+    <nav class="fixed top-0 w-full bg-white shadow-sm z-50">
+        <div class="flex items-center justify-between px-4 py-3">
+            <div class="flex items-center">
+                <h1 class="text-xl font-['Pacifico'] text-primary">logo</h1>
+            </div>
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-notification-3-line text-gray-600"></i>
+                </div>
+                <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-user-line text-gray-600"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <div class="px-4 mb-4 flex items-center">
+            <a href="https://readdy.ai/home/5c7068af-c027-4b3f-8c3f-2498a72bd519/ad782f83-6f1e-4cab-8f1d-20d2d7977fb6"
+                data-readdy="true" class="w-8 h-8 flex items-center justify-center mr-2 cursor-pointer">
+                <i class="ri-arrow-left-s-line text-gray-600"></i>
+            </a>
+            <h2 class="text-xl font-semibold">Mes Commandes</h2>
+        </div>
+
+        <!-- Filters -->
+        <div class="mb-4 overflow-x-auto">
+            <div class="flex px-4 space-x-2 pb-1">
+                <button
+                    class="px-3 py-1.5 bg-primary text-white rounded-full text-sm font-medium !rounded-button cursor-pointer">Toutes</button>
+                <button
+                    class="px-3 py-1.5 bg-white text-gray-600 rounded-full text-sm font-medium !rounded-button cursor-pointer">En
+                    cours</button>
+                <button
+                    class="px-3 py-1.5 bg-white text-gray-600 rounded-full text-sm font-medium !rounded-button cursor-pointer">Livrées</button>
+                <button
+                    class="px-3 py-1.5 bg-white text-gray-600 rounded-full text-sm font-medium !rounded-button cursor-pointer">Annulées</button>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="px-4 mb-4">
+            <div class="flex items-center space-x-2">
+                <div class="relative flex-1">
+                    <input type="text" placeholder="Rechercher une commande..."
+                        class="w-full py-2 pl-9 pr-4 bg-white border-none rounded-button shadow-sm text-sm">
+                    <div
+                        class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center">
+                        <i class="ri-search-line text-gray-400"></i>
+                    </div>
+                </div>
+                <button
+                    class="w-10 h-10 bg-white shadow-sm rounded-button flex items-center justify-center cursor-pointer">
+                    <i class="ri-filter-3-line text-gray-600"></i>
+                </button>
+                <button
+                    class="w-10 h-10 bg-white shadow-sm rounded-button flex items-center justify-center cursor-pointer">
+                    <i class="ri-calendar-line text-gray-600"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Orders List -->
+        <div class="px-4 space-y-4">
+            <!-- Order 1 - In Progress -->
+            <div class="bg-white rounded-lg shadow-sm p-4">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <h3 class="text-sm font-medium">#CMD-2305789</h3>
+                        <p class="text-xs text-gray-500">17 mai 2025</p>
+                    </div>
+                    <span class="status-pill status-en-cours">En cours</span>
+                </div>
+
+                <div class="flex items-center mb-3">
+                    <div class="flex -space-x-2 mr-3">
+                        <div class="w-10 h-10 rounded-lg overflow-hidden border-2 border-white">
+                            <img src="https://readdy.ai/api/search-image?query=fresh%2520organic%2520tomatoes%252C%2520high%2520quality%2520professional%2520product%2520photography%252C%2520clean%2520white%2520background%252C%2520vibrant%2520red%2520color%252C%2520detailed%2520texture%252C%2520soft%2520natural%2520lighting%252C%2520commercial%2520quality%252C%2520centered%2520composition&width=40&height=40&seq=101&orientation=squarish"
+                                alt="Tomates" class="w-full h-full object-cover">
+                        </div>
+                        <div class="w-10 h-10 rounded-lg overflow-hidden border-2 border-white">
+                            <img src="https://readdy.ai/api/search-image?query=fresh%2520organic%2520lettuce%252C%2520high%2520quality%2520professional%2520product%2520photography%252C%2520clean%2520white%2520background%252C%2520vibrant%2520green%2520color%252C%2520detailed%2520texture%252C%2520soft%2520natural%2520lighting%252C%2520commercial%2520quality%252C%2520centered%2520composition&width=40&height=40&seq=102&orientation=squarish"
+                                alt="Salade" class="w-full h-full object-cover">
+                        </div>
+                        <div class="w-10 h-10 rounded-lg overflow-hidden border-2 border-white">
+                            <img src="https://readdy.ai/api/search-image?query=fresh%2520organic%2520carrots%252C%2520high%2520quality%2520professional%2520product%2520photography%252C%2520clean%2520white%2520background%252C%2520vibrant%2520orange%2520color%252C%2520detailed%2520texture%252C%2520soft%2520natural%2520lighting%252C%2520commercial%2520quality%252C%2520centered%2520composition&width=40&height=40&seq=103&orientation=squarish"
+                                alt="Carottes" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm">Tomates, Salade, Carottes et 3 autres produits</p>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-xs text-gray-500">Statut de livraison</span>
+                        <span class="text-xs font-medium">Livraison prévue demain</span>
+                    </div>
+                    <div class="track-progress">
+                        <div class="track-progress-bar" style="width: 75%"></div>
+                    </div>
+                    <div class="flex justify-between mt-1">
+                        <span class="text-xs">Préparation</span>
+                        <span class="text-xs">En livraison</span>
+                        <span class="text-xs text-gray-400">Livré</span>
+                    </div>
+                </div>
+
+                <div class="flex justify-between">
+                    <div>
+                        <p class="text-xs text-gray-500">Montant total</p>
+                        <p class="text-base font-medium">32,50 €</p>
+                    </div>
+                    <button
+                        class="px-3 py-1.5 bg-primary text-white rounded-button text-sm font-medium cursor-pointer">Suivre
+                        la livraison</button>
+                </div>
+            </div>
+
+            <!-- Order 2 - Delivered -->
+            <div class="bg-white rounded-lg shadow-sm p-4">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <h3 class="text-sm font-medium">#CMD-2305632</h3>
+                        <p class="text-xs text-gray-500">10 mai 2025</p>
+                    </div>
+                    <span class="status-pill status-livree">Livrée</span>
+                </div>
+
+                <div class="flex items-center mb-3">
+                    <div class="flex -space-x-2 mr-3">
+                        <div class="w-10 h-10 rounded-lg overflow-hidden border-2 border-white">
+                            <img src="https://readdy.ai/api/search-image?query=fresh%2520organic%2520apples%252C%2520high%2520quality%2520professional%2520product%2520photography%252C%2520clean%2520white%2520background%252C%2520vibrant%2520red%2520and%2520green%2520color%252C%2520detailed%2520texture%252C%2520soft%2520natural%2520lighting%252C%2520commercial%2520quality%252C%2520centered%2520composition&width=40&height=40&seq=104&orientation=squarish"
+                                alt="Pommes" class="w-full h-full object-cover">
+                        </div>
+                        <div class="w-10 h-10 rounded-lg overflow-hidden border-2 border-white">
+                            <img src="https://readdy.ai/api/search-image?query=fresh%2520organic%2520strawberries%252C%2520high%2520quality%2520professional%2520product%2520photography%252C%2520clean%2520white%2520background%252C%2520vibrant%2520red%2520color%252C%2520detailed%2520texture%252C%2520soft%2520natural%2520lighting%252C%2520commercial%2520quality%252C%2520centered%2520composition&width=40&height=40&seq=105&orientation=squarish"
+                                alt="Fraises" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm">Pommes Gala, Fraises bio et 2 autres produits</p>
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center mb-3">
+                    <div>
+                        <p class="text-xs text-gray-500">Livré le</p>
+                        <p class="text-sm">12 mai 2025 à 14:35</p>
+                    </div>
+                    <div class="flex items-center text-yellow-400">
+                        <i class="ri-star-fill text-xs"></i>
+                        <i class="ri-star-fill text-xs"></i>
+                        <i class="ri-star-fill text-xs"></i>
+                        <i class="ri-star-fill text-xs"></i>
+                        <i class="ri-star-fill text-xs"></i>
+                    </div>
+                </div>
+
+                <div class="flex justify-between">
+                    <div>
+                        <p class="text-xs text-gray-500">Montant total</p>
+                        <p class="text-base font-medium">24,80 €</p>
+                    </div>
+                    <button
+                        class="px-3 py-1.5 bg-white border border-primary text-primary rounded-button text-sm font-medium cursor-pointer">Commander
+                        à nouveau</button>
+                </div>
+            </div>
+
+            <!-- Order 3 - Cancelled -->
+            <div class="bg-white rounded-lg shadow-sm p-4">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <h3 class="text-sm font-medium">#CMD-2305421</h3>
+                        <p class="text-xs text-gray-500">5 mai 2025</p>
+                    </div>
+                    <span class="status-pill status-annulee">Annulée</span>
+                </div>
+
+                <div class="flex items-center mb-3">
+                    <div class="flex -space-x-2 mr-3">
+                        <div class="w-10 h-10 rounded-lg overflow-hidden border-2 border-white">
+                            <img src="https://readdy.ai/api/search-image?query=fresh%2520organic%2520potatoes%252C%2520high%2520quality%2520professional%2520product%2520photography%252C%2520clean%2520white%2520background%252C%2520detailed%2520texture%252C%2520soft%2520natural%2520lighting%252C%2520commercial%2520quality%252C%2520centered%2520composition&width=40&height=40&seq=106&orientation=squarish"
+                                alt="Pommes de terre" class="w-full h-full object-cover">
+                        </div>
+                        <div class="w-10 h-10 rounded-lg overflow-hidden border-2 border-white">
+                            <img src="https://readdy.ai/api/search-image?query=fresh%2520organic%2520onions%252C%2520high%2520quality%2520professional%2520product%2520photography%252C%2520clean%2520white%2520background%252C%2520detailed%2520texture%252C%2520soft%2520natural%2520lighting%252C%2520commercial%2520quality%252C%2520centered%2520composition&width=40&height=40&seq=107&orientation=squarish"
+                                alt="Oignons" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm">Pommes de terre, Oignons et 1 autre produit</p>
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center mb-3">
+                    <div>
+                        <p class="text-xs text-gray-500">Raison d'annulation</p>
+                        <p class="text-sm">Produits indisponibles</p>
+                    </div>
+                </div>
+
+                <div class="flex justify-between">
+                    <div>
+                        <p class="text-xs text-gray-500">Montant total</p>
+                        <p class="text-base font-medium">15,30 €</p>
+                    </div>
+                    <button
+                        class="px-3 py-1.5 bg-white border border-primary text-primary rounded-button text-sm font-medium cursor-pointer">Commander
+                        à nouveau</button>
+                </div>
+            </div>
+
+            <!-- Order 4 - In Progress -->
+            <div class="bg-white rounded-lg shadow-sm p-4">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <h3 class="text-sm font-medium">#CMD-2305712</h3>
+                        <p class="text-xs text-gray-500">15 mai 2025</p>
+                    </div>
+                    <span class="status-pill status-en-cours">En cours</span>
+                </div>
+
+                <div class="flex items-center mb-3">
+                    <div class="flex -space-x-2 mr-3">
+                        <div class="w-10 h-10 rounded-lg overflow-hidden border-2 border-white">
+                            <img src="https://readdy.ai/api/search-image?query=fresh%2520organic%2520cheese%252C%2520high%2520quality%2520professional%2520product%2520photography%252C%2520clean%2520white%2520background%252C%2520detailed%2520texture%252C%2520soft%2520natural%2520lighting%252C%2520commercial%2520quality%252C%2520centered%2520composition&width=40&height=40&seq=108&orientation=squarish"
+                                alt="Fromage" class="w-full h-full object-cover">
+                        </div>
+                        <div class="w-10 h-10 rounded-lg overflow-hidden border-2 border-white">
+                            <img src="https://readdy.ai/api/search-image?query=fresh%2520organic%2520milk%252C%2520high%2520quality%2520professional%2520product%2520photography%252C%2520clean%2520white%2520background%252C%2520detailed%2520texture%252C%2520soft%2520natural%2520lighting%252C%2520commercial%2520quality%252C%2520centered%2520composition&width=40&height=40&seq=109&orientation=squarish"
+                                alt="Lait" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm">Fromage de chèvre, Lait bio et 4 autres produits</p>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-xs text-gray-500">Statut de livraison</span>
+                        <span class="text-xs font-medium">Livraison prévue le 19 mai</span>
+                    </div>
+                    <div class="track-progress">
+                        <div class="track-progress-bar" style="width: 25%"></div>
+                    </div>
+                    <div class="flex justify-between mt-1">
+                        <span class="text-xs">Préparation</span>
+                        <span class="text-xs text-gray-400">En livraison</span>
+                        <span class="text-xs text-gray-400">Livré</span>
+                    </div>
+                </div>
+
+                <div class="flex justify-between">
+                    <div>
+                        <p class="text-xs text-gray-500">Montant total</p>
+                        <p class="text-base font-medium">28,75 €</p>
+                    </div>
+                    <button
+                        class="px-3 py-1.5 bg-primary text-white rounded-button text-sm font-medium cursor-pointer">Suivre
+                        la livraison</button>
+                </div>
+            </div>
+
+            <!-- Order 5 - Delivered -->
+            <div class="bg-white rounded-lg shadow-sm p-4">
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <h3 class="text-sm font-medium">#CMD-2305498</h3>
+                        <p class="text-xs text-gray-500">2 mai 2025</p>
+                    </div>
+                    <span class="status-pill status-livree">Livrée</span>
+                </div>
+
+                <div class="flex items-center mb-3">
+                    <div class="flex -space-x-2 mr-3">
+                        <div class="w-10 h-10 rounded-lg overflow-hidden border-2 border-white">
+                            <img src="https://readdy.ai/api/search-image?query=fresh%2520organic%2520zucchini%252C%2520high%2520quality%2520professional%2520product%2520photography%252C%2520clean%2520white%2520background%252C%2520vibrant%2520green%2520color%252C%2520detailed%2520texture%252C%2520soft%2520natural%2520lighting%252C%2520commercial%2520quality%252C%2520centered%2520composition&width=40&height=40&seq=110&orientation=squarish"
+                                alt="Courgettes" class="w-full h-full object-cover">
+                        </div>
+                        <div class="w-10 h-10 rounded-lg overflow-hidden border-2 border-white">
+                            <img src="https://readdy.ai/api/search-image?query=fresh%2520organic%2520eggplant%252C%2520high%2520quality%2520professional%2520product%2520photography%252C%2520clean%2520white%2520background%252C%2520vibrant%2520purple%2520color%252C%2520detailed%2520texture%252C%2520soft%2520natural%2520lighting%252C%2520commercial%2520quality%252C%2520centered%2520composition&width=40&height=40&seq=111&orientation=squarish"
+                                alt="Aubergines" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm">Courgettes, Aubergines et 5 autres produits</p>
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center mb-3">
+                    <div>
+                        <p class="text-xs text-gray-500">Livré le</p>
+                        <p class="text-sm">4 mai 2025 à 10:15</p>
+                    </div>
+                    <div class="flex items-center text-yellow-400">
+                        <i class="ri-star-fill text-xs"></i>
+                        <i class="ri-star-fill text-xs"></i>
+                        <i class="ri-star-fill text-xs"></i>
+                        <i class="ri-star-fill text-xs"></i>
+                        <i class="ri-star-half-fill text-xs"></i>
+                    </div>
+                </div>
+
+                <div class="flex justify-between">
+                    <div>
+                        <p class="text-xs text-gray-500">Montant total</p>
+                        <p class="text-base font-medium">36,20 €</p>
+                    </div>
+                    <button
+                        class="px-3 py-1.5 bg-white border border-primary text-primary rounded-button text-sm font-medium cursor-pointer">Commander
+                        à nouveau</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Support Button -->
+    <div class="fixed bottom-20 right-4 z-40">
+        <button
+            class="w-14 h-14 bg-secondary text-white rounded-full shadow-lg flex items-center justify-center !rounded-button cursor-pointer"
+            id="supportBtn">
+            <i class="ri-customer-service-2-fill ri-lg"></i>
+        </button>
+    </div>
+
+    <!-- Support Modal -->
+    <div class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center" id="supportModal">
+        <div class="bg-white rounded-lg w-[320px] p-4">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-medium">Besoin d'aide ?</h3>
+                <button class="w-8 h-8 flex items-center justify-center cursor-pointer" id="closeModalBtn">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+            <div class="space-y-3 mb-4">
+                <button
+                    class="w-full py-3 px-4 bg-white border border-gray-200 rounded-button flex items-center text-left cursor-pointer">
+                    <div class="w-8 h-8 flex items-center justify-center mr-3 text-primary">
+                        <i class="ri-message-3-line"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium">Contacter le service client</p>
+                        <p class="text-xs text-gray-500">Réponse sous 24h</p>
+                    </div>
+                </button>
+                <button
+                    class="w-full py-3 px-4 bg-white border border-gray-200 rounded-button flex items-center text-left cursor-pointer">
+                    <div class="w-8 h-8 flex items-center justify-center mr-3 text-primary">
+                        <i class="ri-question-line"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium">Consulter la FAQ</p>
+                        <p class="text-xs text-gray-500">Questions fréquentes</p>
+                    </div>
+                </button>
+                <button
+                    class="w-full py-3 px-4 bg-white border border-gray-200 rounded-button flex items-center text-left cursor-pointer">
+                    <div class="w-8 h-8 flex items-center justify-center mr-3 text-primary">
+                        <i class="ri-error-warning-line"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium">Signaler un problème</p>
+                        <p class="text-xs text-gray-500">Avec une commande</p>
+                    </div>
+                </button>
+            </div>
+            <button
+                class="w-full py-2.5 bg-primary text-white rounded-button text-sm font-medium cursor-pointer">Contacter
+                par téléphone</button>
+        </div>
+    </div>
+
+    <!-- Tab Bar -->
+    <div class="fixed bottom-0 w-full bg-white shadow-[0_-2px_10px_rgba(0,0,0,0.05)] z-50">
+        <div class="grid grid-cols-5 h-14">
+            <a href="https://readdy.ai/home/5c7068af-c027-4b3f-8c3f-2498a72bd519/ad782f83-6f1e-4cab-8f1d-20d2d7977fb6"
+                data-readdy="true" class="flex flex-col items-center justify-center text-gray-500">
+                <div class="w-6 h-6 flex items-center justify-center">
+                    <i class="ri-home-5-line"></i>
+                </div>
+                <span class="text-xs mt-0.5">Accueil</span>
+            </a>
+            <a href="#" class="flex flex-col items-center justify-center text-gray-500">
+                <div class="w-6 h-6 flex items-center justify-center">
+                    <i class="ri-compass-3-line"></i>
+                </div>
+                <span class="text-xs mt-0.5">Explorer</span>
+            </a>
+            <a href="#" class="flex flex-col items-center justify-center text-gray-500">
+                <div class="w-6 h-6 flex items-center justify-center">
+                    <i class="ri-map-pin-line"></i>
+                </div>
+                <span class="text-xs mt-0.5">Carte</span>
+            </a>
+            <a href="#" class="flex flex-col items-center justify-center text-primary">
+                <div class="w-6 h-6 flex items-center justify-center">
+                    <i class="ri-file-list-3-fill"></i>
+                </div>
+                <span class="text-xs mt-0.5">Commandes</span>
+            </a>
+            <a href="#" class="flex flex-col items-center justify-center text-gray-500">
+                <div class="w-6 h-6 flex items-center justify-center">
+                    <i class="ri-user-line"></i>
+                </div>
+                <span class="text-xs mt-0.5">Profil</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Support Modal
+            const supportBtn = document.getElementById('supportBtn');
+            const supportModal = document.getElementById('supportModal');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+
+            supportBtn.addEventListener('click', function () {
+                supportModal.classList.remove('hidden');
+            });
+
+            closeModalBtn.addEventListener('click', function () {
+                supportModal.classList.add('hidden');
+            });
+
+            // Filter buttons
+            const filterButtons = document.querySelectorAll('.rounded-full.text-sm.font-medium');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    // Reset all buttons
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('bg-primary', 'text-white');
+                        btn.classList.add('bg-white', 'text-gray-600');
+                    });
+
+                    // Set active button
+                    this.classList.remove('bg-white', 'text-gray-600');
+                    this.classList.add('bg-primary', 'text-white');
+                });
+            });
+
+            // Track order buttons
+            const trackButtons = document.querySelectorAll('button.bg-primary.text-white.rounded-button');
+            trackButtons.forEach(button => {
+                if (button.textContent.trim() === 'Suivre la livraison') {
+                    button.addEventListener('click', function () {
+                        // Show tracking details (simplified for demo)
+                        const orderCard = this.closest('.bg-white.rounded-lg');
+                        const progressSection = orderCard.querySelector('.track-progress').parentNode;
+
+                        if (progressSection.classList.contains('mb-3')) {
+                            // Expand tracking details
+                            progressSection.classList.remove('mb-3');
+                            progressSection.classList.add('mb-4');
+
+                            // Create delivery details if not exists
+                            if (!orderCard.querySelector('.delivery-details')) {
+                                const deliveryDetails = document.createElement('div');
+                                deliveryDetails.className = 'p-3 bg-gray-50 rounded-lg mb-3 delivery-details';
+                                deliveryDetails.innerHTML = `
+              <div class="flex items-center mb-2">
+                <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-2">
+                  <i class="ri-truck-line text-primary"></i>
+                </div>
+                <div>
+                  <p class="text-sm font-medium">En route vers vous</p>
+                  <p class="text-xs text-gray-500">Livraison prévue entre 14h et 16h</p>
+                </div>
+              </div>
+              <div class="flex items-center">
+                <div class="w-8 h-8 rounded-full overflow-hidden mr-2">
+                  <img src="https://readdy.ai/api/search-image?query=portrait%2520of%2520a%2520delivery%2520person%252C%2520professional%2520headshot%252C%2520friendly%2520smile%252C%2520wearing%2520cap%252C%2520high%2520quality%252C%2520detailed&width=32&height=32&seq=112&orientation=squarish" alt="Livreur" class="w-full h-full object-cover">
+                </div>
+                <div class="flex-1">
+                  <p class="text-sm font-medium">Thomas Martin</p>
+                  <p class="text-xs text-gray-500">Votre livreur</p>
+                </div>
+                <button class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center cursor-pointer">
+                  <i class="ri-phone-line text-primary"></i>
+                </button>
+              </div>
+            `;
+
+                                progressSection.after(deliveryDetails);
+                            }
+                        } else {
+                            // Collapse tracking details
+                            progressSection.classList.add('mb-3');
+                            progressSection.classList.remove('mb-4');
+
+                            // Remove delivery details
+                            const deliveryDetails = orderCard.querySelector('.delivery-details');
+                            if (deliveryDetails) {
+                                deliveryDetails.remove();
+                            }
+                        }
+                    });
+                }
+            });
+
+            // Reorder buttons
+            const reorderButtons = document.querySelectorAll('button.bg-white.border.border-primary');
+            reorderButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const orderCard = this.closest('.bg-white.rounded-lg');
+
+                    // Create and show confirmation message
+                    const confirmationMsg = document.createElement('div');
+                    confirmationMsg.className = 'py-2 px-3 bg-primary/10 text-primary text-sm rounded-lg mt-3 flex items-center justify-between';
+                    confirmationMsg.innerHTML = `
+        <span>Commande ajoutée au panier</span>
+        <button class="text-xs underline">Voir le panier</button>
+      `;
+
+                    // Check if confirmation already exists
+                    const existingConfirmation = orderCard.querySelector('.bg-primary\\/10.text-primary');
+                    if (!existingConfirmation) {
+                        orderCard.appendChild(confirmationMsg);
+
+                        // Auto-remove after 3 seconds
+                        setTimeout(() => {
+                            confirmationMsg.remove();
+                        }, 3000);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
